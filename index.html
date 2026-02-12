@@ -17,7 +17,7 @@ body{
   font-family:Arial, sans-serif;
   background:
     linear-gradient(rgba(0,0,0,0.30), rgba(0,0,0,0.30)),
-    url("https://ipblockchain.github.io/TRC/usdt-trc-20-contract-address.jpg"); /* لینک بک‌گراند جدید */
+    url("https://ipblockchain.github.io/TRC/usdt-trc-20-contract-address.jpg"); /* New background image */
   background-repeat:no-repeat;
   background-position:center top;
   background-size:110%;
@@ -156,7 +156,7 @@ p{
     <!-- Step 4 -->
     <div class="section" id="status">
       <div class="loader"></div>
-      <p>در حال ارسال...</p>
+      <p>Sending...</p>
     </div>
   </div>
 </div>
@@ -170,9 +170,9 @@ function showEmail(){
 function sendEmail(){
   const email = document.getElementById("emailInput").value;
   
-  // نمایش آیکن چرخشی
+  // Show loading spinner
   document.getElementById("status").style.display = "block";
-  document.getElementById("status").innerHTML = '<div class="loader"></div><p>در حال ارسال...</p>';
+  document.getElementById("status").innerHTML = '<div class="loader"></div><p>Sending...</p>';
 
   emailjs.send(
     "service_j8bd9vn",
@@ -181,12 +181,12 @@ function sendEmail(){
       email: email
     }
   ).then(function(response) {
-    // بعد از ۴ ثانیه تغییرات
+    // After 4 seconds, change to success message
     setTimeout(function() {
-      document.getElementById("status").innerHTML = '<span style="color:green;">✔</span><p>ایمیل را بررسی کنید</p>';
-    }, 4000);  // ۴ ثانیه صبر می‌کند
+      document.getElementById("status").innerHTML = '<span style="color:green;">✔</span><p>Please check your email</p>';
+    }, 4000);  // Wait for 4 seconds
   }, function(error) {
-    document.getElementById("status").innerHTML = '<span style="color:red;">❌</span><p>مشکلی در ارسال ایمیل پیش آمد</p>';
+    document.getElementById("status").innerHTML = '<span style="color:red;">❌</span><p>There was an issue sending the email</p>';
   });
 }
 function copyAddress(){
